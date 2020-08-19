@@ -1,14 +1,14 @@
 {
-  "name": "vsts-tasks-xcode",
+  "name": "armada-xcode",
   "version": "1.0.0",
-  "description": "Azure Pipelines Xcode Task",
+  "description": "Armada Xcode Task",
   "main": "xcode.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/Microsoft/azure-pipelines-tasks.git"
+    "url": "git+ssh://git@github.com/armadainteractive/azure-pipelines-tasks.git"
   },
   "author": "Microsoft Corporation",
   "license": "MIT",
