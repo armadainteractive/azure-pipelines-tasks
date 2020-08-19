@@ -1,0 +1,32 @@
+{
+  "manifestVersion": 1,
+  "id": "armada-ci-tasks",
+  "name": "Armada Ci Tasks",
+  "version": "0.0.5",
+  "publisher": "armadainteractive-ci",
+  "targets": [
+      {
+          "id": "Microsoft.VisualStudio.Services"
+      }
+  ],    
+  "categories": [
+      "Azure Pipelines"
+  ],
+  "files": [
+      {
+          "path": "Tasks/XcodeV5"
+      }
+  ],
+  "contributions": [
+      {
+          "id": "43F2B7CB-BBEC-405A-894F-1BFA4C1DD46A",
+          "type": "ms.vss-distributed-task.task",
+          "targets": [
+              "ms.vss-distributed-task.tasks"
+          ],
+          "properties": {
+              "name": "Tasks/XcodeV5"
+          }
+      }
+  ]
+}
