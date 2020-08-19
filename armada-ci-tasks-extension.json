@@ -2,7 +2,7 @@
   "manifestVersion": 1,
   "id": "armada-ci-tasks",
   "name": "Armada Ci Tasks",
-  "version": "0.0.5",
+  "version": "0.1.6",
   "publisher": "armadainteractive-ci",
   "targets": [
       {

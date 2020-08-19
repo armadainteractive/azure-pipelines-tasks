@@ -1,3 +1,56 @@
+==========================================================
+# Armada Interactive
+
+Fork of the [Microsoft Azure Pipeline Tasks](https://github.com/microsoft/azure-pipelines-tasks)
+repository.
+
+Reason for forking is the upgrade to Unity 2019.3 requires changes to the parameters to `xcodebuild`
+and there is currently no customizability point in the `XcodeV5` task we can use to accomplish that.
+[There is an issue open on the Microsoft repo to support this](https://github.com/microsoft/azure-pipelines-tasks/issues/12263).
+
+More information about the changes can be found [here](./Tasks/XcodeV5/xcode.ts).
+
+Instead of copying the existing `XcodeV5` task we made (super small) changes to the existing task,
+the hope is that this will make it easier to pull in changes from upstream.
+
+We created a new GUID for the `XcodeV5` task: `43F2B7CB-BBEC-405A-894F-1BFA4C1DD46A` (so it wont
+conflict with the default one). Also we've updated the name from `Xcode` to `ArmadaXcode` to make
+it easier to distinguish.
+
+## Building
+
+You need Node `v8.17.0` to build this, weirdly enough you cannot build it with the latest node.
+[There is an open issue about this](https://github.com/microsoft/azure-pipelines-tasks/issues/11136).
+To make it easier to use an old Node, you can install the `n` version manager (`npm install -g n`) then
+using `n` you can switch the node version: (`n v8.17.0`).
+
+* Install the dependencies using npm (`npm install`).
+* Build the `XcodeV5` task using node (`node make.js build --task XcodeV5`).
+
+## Publishing
+
+The `XcodeV5` task is wrapped in a `vss` extension that can be installed on Azure DevOps.
+The manifest for the `armada-ci-tasks` extension can be found [here](./armada-ci-tasks-extension.json).
+
+To package the `vss` extension you need the [`tfx` cli tooling](https://github.com/Microsoft/tfs-cli).
+Which can be easily installed using npm (`npm install -g tfx-cli`).
+
+Then to package it you can just run the following command:
+
+* `tfx extension create --manifest-globs ./armada-ci-tasks-extension.json --rev-version`
+
+This will create a `vsix` file called: `armadainteractive-ci.armada-ci-tasks-*.*.*.vsix`.
+
+To upload the package you can either use the cli tooling or use the web ui at:
+`https://marketplace.visualstudio.com/manage/publishers/armadainteractive-ci`.
+
+![Click update on 'Armada Ci Tasks'](./armada_docs/publish_update_1.png)
+![Upload 'vsix' file](./armada_docs/publish_update_2.png)
+
+End of Armada readme, below is the original Microsoft readme:
+
+==========================================================
+
 # Azure Pipelines Tasks
 ![Tasks](/taskbanner.png "Tasks")
 

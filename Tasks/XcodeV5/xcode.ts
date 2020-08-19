@@ -204,13 +204,31 @@ async function run() {
                 provProfileName = "";
             }
 
+            //-----------------------------------------------------------------------
+            // Bastian Armada Interactive:
+            //
+            // We have updated the code below to change 'PROVISIONING_PROFILE' to 
+            // 'PROVISIONING_PROFILE_APP' and 'PROVISIONING_PROFILE_SPECIFIER' to
+            // 'PROVISIONING_PROFILE_SPECIFIER_APP'.
+            //
+            // Reason is Unity starting from version 2019.3 is including a new framework
+            // 'UnityFramework.framework' and that does not support signing. Using
+            // the 'APP' suffix makes sure it only applies to the application target
+            // and not all targets.
+            // 
+            // More information can be found in the Unity manual:
+            // https://docs.unity3d.com/Manual/StructureOfXcodeProject.html
+            //
+            //-----------------------------------------------------------------------
+            console.log("[Armada Interactive] Using '_APP' suffix after provisioning profile arg");
+
             // PROVISIONING_PROFILE_SPECIFIER takes predence over PROVISIONING_PROFILE,
             // so it's important to pass it to Xcode even if it's empty. That way Xcode
             // will ignore any specifier in the project file and honor the specifier
             // or uuid we passed on the commandline. If the user wants to use the specifier
             // in the project file, they should choose the "Project Defaults" signing style.
-            xcode_provProfile = `PROVISIONING_PROFILE=${provProfileUUID}`;
-            xcode_provProfileSpecifier = `PROVISIONING_PROFILE_SPECIFIER=${provProfileName}`;
+            xcode_provProfile = `PROVISIONING_PROFILE_APP=${provProfileUUID}`;
+            xcode_provProfileSpecifier = `PROVISIONING_PROFILE_SPECIFIER_APP=${provProfileName}`;
         }
         else if (signingOption === 'auto') {
             xcode_codeSignStyle = 'CODE_SIGN_STYLE=Automatic';
